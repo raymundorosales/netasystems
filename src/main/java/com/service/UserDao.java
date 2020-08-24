@@ -20,7 +20,7 @@ public class UserDao implements IUserDao {
 
 	/**
 	 * Metodo para obtener TODOS los datos de un registro de la tabla NS_USERS
-	 * @param login se usara login en caso de que se este buscando con el correo y el password del usuario
+	 * @param login se usara login en caso de que se este buscando con el correo y el password del usuario 
 	 * @return login contendra los datos que se encuentren en el registro encontrado
 	 */
 	@Override
