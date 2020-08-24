@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/mvc
+ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<!-- PARA AGREGAR RECURSOS DE TIPO CSS O JS AL PROYECTO -->
+	<mvc:resources location="dist/" mapping="dist/**" />
+	<mvc:annotation-driven />
+	
+	<!-- PARA QUE RECONOZCA LAS @ANOTACIONES EN LAS CLASES QUE LAS CONTENGAN -->
+	<context:component-scan base-package="com.controller" />
+	<context:component-scan base-package="com.model" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="hr" />
+		<property name="password" value="hr" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="5" />
+	</bean>
+	<bean id="userDao"
+		class="com.service.UserDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>
